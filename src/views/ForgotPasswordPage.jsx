@@ -1,5 +1,5 @@
 import '../views-css/forgotPassword.css';
-import umLogo from '../umLogo.png';
+import umLogo from '../assets/umLogo.png';
 import React from 'react';
 import BottomBar from '../components/bottomBar';
 

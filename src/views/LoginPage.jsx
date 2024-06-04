@@ -1,5 +1,5 @@
 import '../views-css/login.css';
-import umLogo from '../umLogo.png';
+import umLogo from '../assets/umLogo.png';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

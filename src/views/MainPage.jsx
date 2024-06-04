@@ -1,6 +1,6 @@
 import '../views-css/mainPage.css';
-import umLogo from '../umLogo.png';
-import React, { useState } from 'react';
+import umLogo from '../assets/umLogo.png';
+import React from 'react';
 
 function MainPage() {
 
