@@ -1,0 +1,114 @@
+body {
+  font-family: 'Lato',sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../assets/umGate.png') ;
+  background-size: cover;
+  background-repeat: no-repeat; 
+}
+
+.glass-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(30px);
+    border-radius: 10px;
+    padding: 20px;
+    width: 700px;
+  }
+  
+  .umLogo-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .umLogo {
+    width: 300px;
+    height: 220px;
+  }
+  
+  .form-container{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .glass-card h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .forgot-password {
+    color:white;
+    text-decoration: underline;
+    font-size: 14px;
+  }
+  
+  .forgot-password:hover {
+    color: #021E4A;
+  }
+  
+  .input-group select {
+    margin-bottom: 5px;
+    width: 200px;
+    padding: 13px;
+    border-radius: 13px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+  
+  .input-group input {
+    width: 350px;
+    padding: 13px;
+    border-radius: 13px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+  
+  .input-group a {
+    color: rgba(59, 49, 131);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .input-group button {
+    width: 100%;
+    padding: 10px;
+    border-radius:13px;
+    border: none;
+    background-color: rgba(245, 209, 40);
+    color: #000;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 15px;
+    transition: ease 0.3s;
+  }
+  
+  .input-group button:hover {
+    background-color: #021E4A;
+    color: #fff;
+    transform: scale(1.07);
+    font-weight: 600;
+  }
+
+  .bottom-bar {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 5vh;
+    margin-left: calc(25% - 50vw);
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+  }
