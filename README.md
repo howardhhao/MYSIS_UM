@@ -1,3 +1,6 @@
+This is a redesigned web application about MYSIS UM by using React JS & CSS for front-end part, Express JS as back-end architecture and mock user databases.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
