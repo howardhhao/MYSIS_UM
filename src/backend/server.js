@@ -17,7 +17,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Import and use the login route
-const loginRoute = require('./api/login');
+const loginRoute = require('../api/login');
 app.use('/login', loginRoute);
 
 // Handle other methods

@@ -1,19 +1,30 @@
 import '../views-css/mainPage.css';
 import umLogo from '../assets/umLogo.png';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function MainPage() {
 
-    const handleLogOut = () => {
-        window.location.href = '/'
-      };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    window.location.href = 'https://helpdesk.um.edu.my/';
+  };
+
+  const handleLogOut = () => {
+      window.location.href = '/'
+  };
+
+  const handleLogoClick = () => {
+    window.location.href = '/main';
+};
 
 
   return (
     <>
     <div className="dashboard-container">
       <div className="nav-bar">
-        <img className='umLogo-nav-bar' src={umLogo} alt='UM Logo' />
+        <img className='umLogo-nav-bar' src={umLogo} alt='UM Logo' onClick={handleLogoClick} />
         <button className='log-out-button' onClick={handleLogOut}>Log Out</button>
       </div>
 
@@ -21,7 +32,7 @@ function MainPage() {
         <p className='intro-title'>Check your co-curricular activities</p>
         <div className='intro-btn-container'>
         <button className='btn-about-us'>About Us</button>
-        <button className='btn-helpdesk'>Helpdesk</button>
+        <button className='btn-helpdesk' onClick={handleClick}>Helpdesk</button>
         </div>
       </div>
 
