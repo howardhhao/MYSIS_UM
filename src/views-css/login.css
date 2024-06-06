@@ -61,7 +61,7 @@ background-repeat: no-repeat;
   padding: 13px;
   border-radius: 7px;
   border: 1px solid #ccc;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .input-group input {
@@ -69,7 +69,7 @@ background-repeat: no-repeat;
   padding: 13px;
   border-radius: 7px;
   border: 1px solid #ccc;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .input-group a {
@@ -99,7 +99,8 @@ background-repeat: no-repeat;
 }
 
 .bottom-bar {
-  background-color: white;
+  background-color: #021E4A;
+  color: white;
   position: fixed;
   bottom: 0;
   width: 100vw;

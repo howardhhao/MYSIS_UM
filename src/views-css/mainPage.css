@@ -1,3 +1,7 @@
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
 .dashboard-container {
     position: fixed;
     top: 0;
@@ -31,8 +35,24 @@
     font-size: 15px;
     height: 35px;
     border: red 1px solid;
-    margin-left: 150vh;
     margin-top: 4.5vh;
+}
+
+.icon-menu {
+  margin-right: 2vh;
+  margin-top: 5vh;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.icon-notification {
+  margin-left: 140vh;
+  margin-top: 5vh;
+  margin-right: 2vh;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 
 .log-out-button:hover {
@@ -105,6 +125,31 @@
     font-size: 16px;
   }
   
+  .content-item-list{
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 40px;
+    background-color: #021E4A;
+    border-radius: 5px;
+    padding: 15px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .content-item-list:hover {
+    color: white;
+    background-color: #021E4A;
+    border: rgba(245, 209, 40) solid 2px;
+    
+  }
+
   .content-item {
     display: inline-block;
     margin-right: 10px;
@@ -117,17 +162,16 @@
     background-color: white;
     border-radius: 5px;
     padding: 15px;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .content-item:hover {
     color: white;
     background-color: #021E4A;
     border: rgba(245, 209, 40) solid 1px;
-    font-weight: bold;
   }
 
   .btn-about-us{
@@ -137,9 +181,10 @@
     font-size: 18px;
     cursor: pointer;
     background-color: #021E4A;
-    border: none;
+    border: 1px solid transparent;
     color: white;
     width: 200px;
+    border-radius: 5px;
   }
 
   .btn-helpdesk{
@@ -149,24 +194,51 @@
     font-size: 18px;
     cursor: pointer;
     background-color: white;
-    border: none;
     color: #021E4A;
     width: 200px;
+    border: 1px solid transparent;
+    border-radius: 5px;
   }
-
+  .btn-helpdesk:hover,
   .btn-about-us:hover {
-    background-color: white;
-    color: #021E4A;
-    font-weight: 400;
-  }
-
-  .btn-helpdesk:hover {
-    background-color: #021E4A;
-    color: white;
-    font-weight: 400;
+    box-shadow: 0 0 7px white;
+    outline: none;
   }
 
   .intro-btn-container {
     display: flex;
     justify-content: center;
+  }
+
+  .carousel-container {
+    margin-top: 20px;
+  }
+
+  .aboutUs1-container {
+    background-image: url('../assets/aboutUs1.png');
+    width: 194vh;
+    height: 100vh;
+    margin-top: -50px;
+  }
+
+  .aboutUs2-container {
+    background-image: url('../assets/aboutUs2.png');
+    width: 194vh;
+    height: 100vh;
+    margin-top: -60px;
+  }
+
+  .aboutUs3-container {
+    background-image: url('../assets/aboutUs3.png');
+    width: 194vh;
+    height: 100vh;
+    margin-top: -60px;
+  }
+
+  .aboutUs1-title {
+    color: white;
+    font-size: 60px;
+    padding-left: 40px;
+    padding-top: 156px;
+    max-width: 600px;
   }

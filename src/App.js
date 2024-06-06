@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './views/LoginPage';
 import ForgotPasswordPage from './views/ForgotPasswordPage';
 import MainPage from './views/MainPage';
+import AboutUsPage from './views/AboutUsPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/forgotPassword" element={<ForgotPasswordPage />} />
           <Route exact path="/main" element={<MainPage />} />
+          <Route exact path="/aboutUs" element={<AboutUsPage />} />
         </Routes>
       </div>
     </Router>
