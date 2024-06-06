@@ -1,0 +1,120 @@
+@keyframes fadeInSlide {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+.aboutUs1-container {
+    background-image: url('../assets/aboutUs1.png');
+    width: 194vh;
+    height: 50vh;
+    margin-top: -50px;
+  }
+
+  .aboutUs2-container {
+    background-image: url('../assets/aboutUs2.png');
+    width: 194vh;
+    height: 115vh;
+    margin-top: -60px;
+  }
+
+  .aboutUs3-container {
+    background-image: url('../assets/aboutUs3.png');
+    width: 194vh;
+    height: 100vh;
+    margin-top: -60px;
+  }
+
+  .aboutUs1-title {
+    color: white;
+    font-size: 60px;
+    padding-left: 10vh;
+    padding-top: 100px;
+    max-width: 600px;
+    animation: fadeInSlide 2s ease-out forwards;
+  }
+
+  .aboutUs2-title {
+    color: white;
+    font-size: 60px;
+    padding-left: 60vh;
+    padding-top: 70px;
+    text-align: center;
+    max-width: 600px;
+    animation: fadeInSlide 2s ease-out forwards;
+  }
+
+  .vertical-line {
+    width: 2px;              
+    height: 15vh;            
+    background-color: white;  
+    margin-left: 30vh;             
+  }
+
+  .phase-1-year {
+    font-size: 40px;
+    color: white;
+    padding-left: 10px;
+  }
+
+  .phase-1-title {
+    font-size: 23px;
+    color: white;
+    padding-left: 32vh;
+    margin-top: -8vh;
+  }
+
+  .vertical-line-2 {
+    width: 2px;              
+    height: 15vh;            
+    background-color: white;  
+    margin-left: 163vh;  
+    margin-top: 20vh; 
+  }
+
+  .phase-2-year {
+    font-size: 40px;
+    color: white;
+    padding-left: 10px;
+    margin-top: -15vh;
+    margin-left: 150vh;  
+  }
+
+  .phase-2-title {
+    font-size: 23px;
+    color: white;
+    padding-left: 12vh;
+    margin-top: -8px;
+    margin-left: 131vh;  
+  }
+
+  .vertical-line-3 {
+    width: 2px;              
+    height: 15vh;            
+    background-color: white;  
+    margin-left: 30vh;
+    margin-top: 15vh;
+  }
+
+  .phase-3-year {
+    font-size: 40px;
+    color: white;
+    padding-left: 32vh;
+    margin-top: -15vh;  
+  }
+
+  .phase-3-title {
+    font-size: 23px;
+    color: white;
+    padding-left: 32vh;
+    margin-top: -5px;
+  }
+  
+  .animation-container {
+    animation: fadeInSlide 2s ease-out forwards;
+  }
