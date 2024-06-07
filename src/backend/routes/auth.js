@@ -1,8 +1,6 @@
 const express = require('express');
 const User = require('../models/User.js');
 const { compare } = require('bcryptjs');
-const { genSalt, hash } = require('bcryptjs');
-
 
 const router = express.Router();
 
@@ -37,8 +35,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ success: false, message: 'User not found' });
     }
 
-    const isPasswordValid = await compare(password, user.password); // Compare provided password with hashed password from the database
-
+    const isPasswordValid = await compare(password, user.password);
     if (isPasswordValid && user.role === role) {
       return res.status(200).json({ success: true, message: 'Login successful', user: { id: user.id, role: user.role } });
     } else {

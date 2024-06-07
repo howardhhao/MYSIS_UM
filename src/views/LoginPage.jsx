@@ -1,24 +1,12 @@
 import '../views-css/login.css';
 import umLogo from '../assets/umLogo.png';
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BottomBar from '../components/bottomBar';
-import bcrypt from 'bcryptjs';
 
 function LoginPage() {
     const navigate = useNavigate();
-
-    // const hashPassword = async (password) => {
-    //     try {
-    //         const salt = await bcrypt.genSalt(10);
-    //         const hashedPassword = await bcrypt.hash(password, salt);
-    //         return hashedPassword;
-    //     } catch (error) {
-    //         console.error('Error hashing password:', error);
-    //         throw error;
-    //     }
-    // };
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -26,9 +14,6 @@ function LoginPage() {
         const id = e.target.elements.id.value;
         const password = e.target.elements.password.value;
         const role = e.target.elements.role.value;
-        console.log (password);
-
-        // const hashedPassword = await hashPassword(password);
 
         try {
             const response = await axios.post('http://localhost:5050/auth/login', { id, password, role });
@@ -36,6 +21,7 @@ function LoginPage() {
             navigate('./main');
         } catch (error) {
             console.error('Error signing in:', error);
+            alert('Incorrect login credentials');
         }
     };
 
