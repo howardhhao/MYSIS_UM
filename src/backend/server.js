@@ -9,23 +9,18 @@ const app = express();
 // Middleware for parsing request body
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-
-// Middleware
 app.use(bodyParser.json());
 
 const corsOptions = {
   origin: 'http://localhost:3000'
 };
-
 app.use(cors(corsOptions));
 
 
 // Routes
 app.use('/auth', authRoutes);
 
-
 mongoose.connect('mongodb://localhost:27017/mysis', {
-  
 })
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
