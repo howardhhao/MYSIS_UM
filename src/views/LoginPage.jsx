@@ -52,9 +52,9 @@ function LoginPage() {
           <div className="input-group">
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Username"
+              id="id"
+              name="id"
+              placeholder="Staff/Student ID"
               value={username}
               onChange={handleUsernameChange}
               required />
@@ -81,6 +81,7 @@ function LoginPage() {
 
           <div>
             <a className="forgot-password" href="/forgotPassword">Forgot password?</a>
+            <a className="first-time-login" href="/register">First time login?</a>
           </div>
 
           <div className="input-group">

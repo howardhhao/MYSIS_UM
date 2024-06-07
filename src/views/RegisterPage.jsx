@@ -4,9 +4,9 @@ import React , { useState } from 'react';
 import BottomBar from '../components/bottomBar';
 
 
-function ForgotPasswordPage() {
+function RegisterPage() {
 
-  const [value, setValue] = useState('');
+    const [value, setValue] = useState('');
 
   const formatIC = (inputValue) => {
     let formattedValue = inputValue.replace(/\D/g, '');
@@ -34,11 +34,20 @@ function ForgotPasswordPage() {
         <img className='umLogo-reset-password' src={umLogo} alt='UM Logo' />
       </div>
 
-      <p className='title'>Reset Password</p>
-      <p className='desc-title'>To initiate the password reset process, please enter your IC Number along with either your Staff ID or Student ID in the provided fields. Upon submission, an email will be sent to your registered alternate email address with further instructions on how to reset your password.</p>
+      <p className='title'>Welcome to UniMalaya</p>
+      <p className='desc-title'>You need to activate your MYSIS UM account before login.</p>
 
       <div className='form-container'>
         <form>
+            <div className="input-group">
+                <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required />
+            </div>
+            
           <div className="input-group">
             <input
               type="text"
@@ -46,8 +55,6 @@ function ForgotPasswordPage() {
               name="ic"
               placeholder="IC/Passport No."
               maxLength= {14}
-              value={value}
-              onChange={handleChange}
               required />
           </div>
 
@@ -57,6 +64,24 @@ function ForgotPasswordPage() {
               id="id"
               name="id"
               placeholder="Staff/Student ID"
+              required />
+          </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required />
+          </div>
+
+          <div className="input-group">
+            <input
+              type="text"
+              id="id"
+              name="id"
+              placeholder="Confirm Password"
               required />
           </div>
 
@@ -79,4 +104,4 @@ function ForgotPasswordPage() {
     </>
   );
 }
-export default ForgotPasswordPage;
+export default RegisterPage;

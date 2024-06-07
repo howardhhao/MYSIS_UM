@@ -39,6 +39,7 @@ background-repeat: no-repeat;
   font-size: 22px;
   margin-top: -20px;
   margin-bottom: 40px;
+  font-weight: 300;
 }
 
 .input-group {
@@ -51,8 +52,16 @@ background-repeat: no-repeat;
   font-size: 14px;
 }
 
+.first-time-login:hover,
 .forgot-password:hover {
   color: #021E4A;
+}
+
+.first-time-login {
+  color:white;
+  text-decoration: underline;
+  font-size: 14px;
+  padding-left: 8px;
 }
 
 .input-group select {
@@ -95,7 +104,6 @@ background-repeat: no-repeat;
   background-color: #021E4A;
   color: #fff;
   transform: scale(1.07);
-  font-weight: 600;
 }
 
 .bottom-bar {

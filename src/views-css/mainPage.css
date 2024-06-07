@@ -98,7 +98,7 @@
 
   .horizontal-scroll-announcement-container {
     width: 194vh; 
-    height: 40vh;
+    height: 70vh;
     overflow-x: scroll; 
     white-space: nowrap;
     background-color: white;
@@ -110,8 +110,8 @@
     display: inline-block;
     margin-right: 10px;
     color: black;
-    width: 350px;
-    height: 220px;
+    width: 290px;
+    height: 360px;
     margin-top: 20px;
     margin-right: 5px;
     margin-left: 50px;
@@ -204,10 +204,11 @@
     border: 1px solid transparent;
     border-radius: 5px;
   }
-  .btn-helpdesk:hover,
+  .btn-helpdesk:hover {
+    background-color: rgba(255, 255, 255, 0.579);
+  }
   .btn-about-us:hover {
-    box-shadow: 0 0 7px white;
-    outline: none;
+   background-color: #021e4aa4;
   }
 
   .intro-btn-container {

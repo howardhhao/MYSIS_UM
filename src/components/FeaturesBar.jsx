@@ -13,7 +13,6 @@ function FeaturesBar() {
         <div class="content-item">Smartcard</div>
         <div class="content-item">Award</div>
         <div class="content-item">MyCPP</div>
-        <div class="content-item">MyCPP</div>
         <div class="content-item">Finance</div>
     </div>
     </>
