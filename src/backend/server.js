@@ -9,7 +9,7 @@ const port = 5050;
 
 // Middleware to run CORS
 app.use(cors({
-    origin: '*', // Allow all origins, change this to a specific origin for better security
+    origin: '*',
     methods: ['POST', 'GET', 'HEAD'],
 }));
 

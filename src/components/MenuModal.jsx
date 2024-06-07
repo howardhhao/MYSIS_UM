@@ -25,11 +25,12 @@ const MenuModal = ({ isOpen, onClose, children }) => {
         }
         .modal-content {
           background-color: #fefefe;
-          margin: 6% auto;
-          padding: 10px;
+          margin: 2% auto;
+          padding: 15px;
           border: 1px solid #888;
           width: 40%;
           border-radius: 10px;
+          margin-bottom: 10px;
         }
         .close {
           color: #aaa;

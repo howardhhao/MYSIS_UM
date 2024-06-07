@@ -1,13 +1,10 @@
 import '../views-css/mainPage.css';
-import React , { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import FeaturesBar from '../components/FeaturesBar';
 import Navbar from '../components/NavBarMysis';
 import Footer from '../components/Footer';
 
 function MainPage() {
-
-  const navigate = useNavigate();
 
   const handleClickAboutUs = () => {
     window.location.href = '/aboutUs';

@@ -26,6 +26,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     <>
    <div className="nav-bar">
           <img className='umLogo-nav-bar' src={umLogo} alt='UM Logo' onClick={handleLogoClick} />
+          {/* <p>Username <span>Name</span></p> */}
           <Icon className='icon-notification' icon="ph:notification-light" />
           <Icon className='icon-menu' onClick={handleMenuDropDown} icon={roundMenu}/>
           <MenuModal isOpen={isModalOpen} onClose={handleMenuDropDown}>
