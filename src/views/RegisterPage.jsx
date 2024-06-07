@@ -1,107 +1,140 @@
 import '../views-css/forgotPassword.css';
 import umLogo from '../assets/umLogo.png';
-import React , { useState } from 'react';
+import React, { useState } from 'react';
 import BottomBar from '../components/bottomBar';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
 
-    const [value, setValue] = useState('');
+  const navigate = useNavigate();
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    ic: '',
+    id: '',
+    password: '',
+    confirmPassword: '',
+    role: '',
+  });
 
   const formatIC = (inputValue) => {
     let formattedValue = inputValue.replace(/\D/g, '');
-    
     if (formattedValue.length > 6) {
       formattedValue = formattedValue.slice(0, 6) + '-' + formattedValue.slice(6);
     }
     if (formattedValue.length > 9) {
       formattedValue = formattedValue.slice(0, 9) + '-' + formattedValue.slice(9, 13);
     }
-
     return formattedValue;
   };
 
   const handleChange = (e) => {
-    const inputValue = e.target.value;
-    const formattedValue = formatIC(inputValue);
-    setValue(formattedValue);
+    const { name, value } = e.target;
+    const formattedValue = name === 'ic' ? formatIC(value) : value;
+    setFormData({
+      ...formData,
+      [name]: formattedValue,
+    });
+  };
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, ic, id, password, role } = formData;
+
+    try {
+      const response = await axios.post('http://localhost:5050/auth/register', { email, ic, id, password, role });
+      console.log(response.data);
+      navigate('/');
+    } catch (error) {
+      // alert('Error registering user:', error);
+      console.log('Error registering user:', error);
+    }
   };
 
   return (
-    <><div className="glass-card-reset">
-
-      <div className="umLogo-container">
-        <img className='umLogo-reset-password' src={umLogo} alt='UM Logo' />
-      </div>
-
-      <p className='title'>Welcome to UniMalaya</p>
-      <p className='desc-title'>You need to activate your MYSIS UM account before login.</p>
-
-      <div className='form-container'>
-        <form>
+    <>
+      <div className="glass-card-reset">
+        <div className="umLogo-container">
+          <img className='umLogo-reset-password' src={umLogo} alt='UM Logo' />
+        </div>
+        <p className='title'>Welcome to UniMalaya</p>
+        <p className='desc-title'>You need to activate your MYSIS UM account before login.</p>
+        <div className='form-container'>
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
-                <input
-                type="email"
+              <input
+                type="text"
                 id="email"
                 name="email"
                 placeholder="Email"
-                required />
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
-            
-          <div className="input-group">
-            <input
-              type="text"
-              id="ic"
-              name="ic"
-              placeholder="IC/Passport No."
-              maxLength= {14}
-              required />
-          </div>
-
-          <div className="input-group">
-            <input
-              type="text"
-              id="id"
-              name="id"
-              placeholder="Staff/Student ID"
-              required />
-          </div>
-
-          <div className="input-group">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              required />
-          </div>
-
-          <div className="input-group">
-            <input
-              type="text"
-              id="id"
-              name="id"
-              placeholder="Confirm Password"
-              required />
-          </div>
-
-          <div className="input-group">
-            <select id="role" name="role" required>
-              <option value="" disabled selected>Select role</option>
-              <option value="admin">Staff</option>
-              <option value="user">Student</option>
-            </select>
-          </div>
-
-          <div className="input-group">
-            <button type="submit">Continue</button>
-          </div>
-
-        </form>
+            <div className="input-group">
+              <input
+                type="text"
+                id="ic"
+                name="ic"
+                placeholder="IC/Passport No."
+                maxLength={14}
+                value={formData.ic}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="text"
+                id="id"
+                name="id"
+                placeholder="Staff/Student ID"
+                value={formData.id}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <select id="role" name="role" value={formData.role} onChange={handleChange} required>
+                <option value="" disabled>Select role</option>
+                <option value="Staff">Staff</option>
+                <option value="Student">Student</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <button type="submit">Continue</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <BottomBar />
+      <BottomBar />
     </>
   );
 }
+
 export default RegisterPage;

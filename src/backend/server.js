@@ -1,31 +1,42 @@
+const authRoutes = require('../backend/routes/auth.js');
 const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const path = require('path');
+const cors = require('cors');
 
-// Initialize Express app
 const app = express();
-const port = 5050;
 
-// Middleware to run CORS
-app.use(cors({
-    origin: '*',
-    methods: ['POST', 'GET', 'HEAD'],
-}));
+// Middleware for parsing request body
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-// Middleware to parse JSON bodies
+// Middleware
 app.use(bodyParser.json());
 
-// Import and use the login route
-const loginRoute = require('../api/login');
-app.use('/login', loginRoute);
+const corsOptions = {
+  origin: 'http://localhost:3000'
+};
 
-// Handle other methods
-app.use((req, res) => {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+app.use(cors(corsOptions));
+
+
+// Routes
+app.use('/auth', authRoutes);
+
+
+mongoose.connect('mongodb://localhost:27017/mysis', {
+  
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Server error 2');
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+const PORT = 5050;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
