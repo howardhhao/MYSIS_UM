@@ -2,8 +2,7 @@ const express = require('express');
 const User = require('../models/User.js');
 const { compare , bcrypt } = require('bcryptjs');
 const rateLimit = require('express-rate-limit');
-const crypto = require('crypto');
-const { sendResetEmail } = require('../../utils/emailService.js');
+
 
 const router = express.Router();
 
@@ -73,64 +72,64 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Password reset request endpoint
-router.post('/reset-password-request', async (req, res) => {
-  const { ic, id, role } = req.body;
+async function verifyUserInDatabase(id, ic, role) {
+  try {
+    const user = await User.findOne({ id });
+    if (user && user.ic === ic && user.role === role) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Error verifying user:", error);
+    return false;
+  }
+}
+
+// verify user exists
+router.post('/verifyUser', async (req, res) => {
+  const { id, ic, role } = req.body;
+  
+  // Validate input
+  if (!id || !ic || !role) {
+    return res.status(400).json({ success: false, message: 'All fields are required.' });
+  }
 
   try {
-    const user = await User.findOne({ ic, id, role });
-
-    if (!user) {
-      return res.status(400).json({ msg: 'Invalid user information' });
+    const userExists = await verifyUserInDatabase(id, ic, role);
+    if (userExists) {
+      return res.json({ success: true });
+    } else {
+      return res.status(404).json({ success: false, message: 'User not found or details incorrect.' });
     }
-
-    // Generate reset token
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    user.resetPasswordToken = resetToken;
-    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-    await user.save();
-
-    // Send reset email
-    await sendResetEmail(user.email, resetToken);
-
-    res.status(200).json({ msg: 'Password reset email sent' });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+  } catch (error) {
+    console.error('Error during user verification:', error);
+    return res.status(500).json({ success: false, message: 'Internal server error.' });
   }
 });
 
-// Password reset endpoint
-router.post('/reset-password', async (req, res) => {
-  const { token, newPassword } = req.body;
+router.post('/updatePassword', async (req, res) => {
+  const { id, newPassword } = req.body;
+
+  if (!id || !newPassword) {
+    return res.status(400).json({ success: false, message: 'ID and new password are required.' });
+  }
 
   try {
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() }
-    });
+    const user = await User.findOne({ id });
 
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid or expired token' });
+      return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
-    // Hash new password
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
-
-    // Clear reset token fields
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
     await user.save();
 
-    res.status(200).json({ msg: 'Password reset successful' });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    return res.json({ success: true });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({ success: false, message: 'Internal server error.' });
   }
 });
-
 
 module.exports = router;
