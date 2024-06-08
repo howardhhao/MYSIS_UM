@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/User.js');
-const { compare , bcrypt } = require('bcryptjs');
+const { compare , bcrypt , genSalt, hash } = require('bcryptjs');
 const rateLimit = require('express-rate-limit');
 
 
@@ -107,8 +107,14 @@ router.post('/verifyUser', async (req, res) => {
 });
 
 const hashPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return bcrypt.hash(password, salt);
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    return hashedPassword;
+  } catch (error) {
+    console.error('Error hashing password:', error);
+    throw new Error('Error hashing password');
+  }
 };
 
 router.post('/updatePassword', async (req, res) => {
@@ -125,14 +131,19 @@ router.post('/updatePassword', async (req, res) => {
       return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
-    const hashedPassword = await hashPassword(newPassword);
-    user.password = hashedPassword;
-    await user.save();
+    try {
+      const hashedPassword = await hashPassword(newPassword);
+      user.password = hashedPassword;
+      await user.save();
+    } catch (error) {
+      console.error('Error hashing password:', error);
+      // Handle the error
+    }
 
     res.json({ success: true });
   } catch (error) {
     console.error('Error updating password:', error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message , error: error.message });
   }
 });
 

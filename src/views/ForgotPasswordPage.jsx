@@ -3,9 +3,11 @@ import umLogo from '../assets/umLogo.png';
 import React, { useState } from 'react';
 import axios from 'axios';
 import BottomBar from '../components/bottomBar';
+import {useNavigate} from 'react-router-dom';
 
 function ForgotPasswordPage() {
 
+  const navigate = useNavigate();
   const [ic, setIC] = useState('');
   const [id, setID] = useState('');
   const [role, setRole] = useState('');
@@ -60,8 +62,10 @@ function ForgotPasswordPage() {
     try {
       const response = await axios.post('http://localhost:5050/auth/updatePassword', { ic, newPassword });
       console.log(response);
+      console.log(ic, newPassword);
       if (response.data.success) {
         setShowPasswordModal(false);
+        navigate('/');
       } else {
         console.log('Failed to update password. Please try again.');
       }
