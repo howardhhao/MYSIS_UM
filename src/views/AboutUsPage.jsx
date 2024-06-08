@@ -1,13 +1,10 @@
 import '../views-css/aboutUs.css';
 import '../views-css/mainPage.css';
-import React , { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import NavBarMysis from '../components/NavBarMysis';
 import Footer from '../components/Footer';
 
 function AboutUsPage() {
-
-  const navigate = useNavigate();
 
   return (
     <>

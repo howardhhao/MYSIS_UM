@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { genSalt, hash } = require('bcryptjs');
 
-
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -22,10 +21,12 @@ const UserSchema = new Schema({
   role: {
     type: String,
     required: true,
-  }
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
-// Pre-save hook to hash passwords before saving
+// password hashing function 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await genSalt(10);

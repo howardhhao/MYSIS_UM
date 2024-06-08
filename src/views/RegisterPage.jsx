@@ -4,10 +4,16 @@ import React, { useState } from 'react';
 import BottomBar from '../components/bottomBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Joi from 'joi';
+
 
 function RegisterPage() {
 
   const navigate = useNavigate();
+
+  const schema = Joi.object({
+    password: Joi.string().min(8).required()
+  });
   
   const [formData, setFormData] = useState({
     email: '',
@@ -41,15 +47,21 @@ function RegisterPage() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, ic, id, password, role } = formData;
 
     try {
+      await schema.validateAsync({ password: formData.password }, { abortEarly: false });
+      const { email, ic, id, password, role } = formData;
       const response = await axios.post('http://localhost:5050/auth/register', { email, ic, id, password, role });
       console.log(response.data);
       navigate('/');
     } catch (error) {
-      // alert('Error registering user:', error);
-      console.log('Error registering user:', error);
+      if (error.isJoi) {
+        error.details.forEach(detail => {
+          alert('Passwords must be exceeded 8 characters');
+        });
+      } else {
+        console.error('Error registering user:', error);
+      }
     }
   };
 

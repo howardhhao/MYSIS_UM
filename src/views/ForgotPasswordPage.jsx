@@ -1,12 +1,16 @@
 import '../views-css/forgotPassword.css';
 import umLogo from '../assets/umLogo.png';
 import React , { useState } from 'react';
+import axios from 'axios';
 import BottomBar from '../components/bottomBar';
 
 
 function ForgotPasswordPage() {
 
-  const [value, setValue] = useState('');
+  const [ic, setIC] = useState('');
+  const [id, setID] = useState('');
+  const [role, setRole] = useState('');
+  const [message, setMessage] = useState('');
 
   const formatIC = (inputValue) => {
     let formattedValue = inputValue.replace(/\D/g, '');
@@ -21,10 +25,34 @@ function ForgotPasswordPage() {
     return formattedValue;
   };
 
-  const handleChange = (e) => {
+  const handleICChange = (e) => {
     const inputValue = e.target.value;
     const formattedValue = formatIC(inputValue);
-    setValue(formattedValue);
+    setIC(formattedValue);
+  };
+
+
+  const handleIDChange = (e) => {
+    setID(e.target.value);
+  };
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5050/auth/reset-password-request', {
+        ic,
+        id,
+        role
+      });
+
+      setMessage(response.data.msg);
+    } catch (error) {
+      setMessage('Error: ' + (error.response ? error.response.data.msg : 'Server error'));
+    }
   };
 
   return (
@@ -38,7 +66,7 @@ function ForgotPasswordPage() {
       <p className='desc-title'>To initiate the password reset process, please enter your IC Number along with either your Staff ID or Student ID in the provided fields. Upon submission, an email will be sent to your registered alternate email address with further instructions on how to reset your password.</p>
 
       <div className='form-container'>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <input
               type="text"
@@ -46,8 +74,8 @@ function ForgotPasswordPage() {
               name="ic"
               placeholder="IC/Passport No."
               maxLength= {14}
-              value={value}
-              onChange={handleChange}
+              value={ic}
+              onChange={handleICChange}
               required />
           </div>
 
@@ -56,12 +84,14 @@ function ForgotPasswordPage() {
               type="text"
               id="id"
               name="id"
+              value={id}
+              onChange={handleIDChange}
               placeholder="Staff/Student ID"
               required />
           </div>
 
           <div className="input-group">
-            <select id="role" name="role" required>
+            <select id="role" value={role} onChange={handleRoleChange} name="role" required>
               <option value="" disabled selected>Select role</option>
               <option value="admin">Staff</option>
               <option value="user">Student</option>
@@ -73,6 +103,7 @@ function ForgotPasswordPage() {
           </div>
 
         </form>
+        {message && <p className="message">{message}</p>}
       </div>
     </div>
     <BottomBar />
