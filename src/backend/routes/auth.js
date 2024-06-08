@@ -89,7 +89,6 @@ async function verifyUserInDatabase(id, ic, role) {
 router.post('/verifyUser', async (req, res) => {
   const { id, ic, role } = req.body;
   
-  // Validate input
   if (!id || !ic || !role) {
     return res.status(400).json({ success: false, message: 'All fields are required.' });
   }
@@ -107,28 +106,33 @@ router.post('/verifyUser', async (req, res) => {
   }
 });
 
-router.post('/updatePassword', async (req, res) => {
-  const { id, newPassword } = req.body;
+const hashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+};
 
-  if (!id || !newPassword) {
-    return res.status(400).json({ success: false, message: 'ID and new password are required.' });
+router.post('/updatePassword', async (req, res) => {
+  const { ic, newPassword } = req.body;
+
+  if (!ic || !newPassword) {
+    return res.status(400).json({ success: false, message: 'IC and new password are required.' });
   }
 
   try {
-    const user = await User.findOne({ id });
+    const user = await User.findOne({ ic });
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await hashPassword(newPassword);
     user.password = hashedPassword;
     await user.save();
 
-    return res.json({ success: true });
+    res.json({ success: true });
   } catch (error) {
     console.error('Error updating password:', error);
-    return res.status(500).json({ success: false, message: 'Internal server error.' });
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 

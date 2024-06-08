@@ -55,12 +55,11 @@ function ForgotPasswordPage() {
   const handlePasswordChange = (e) => {
     setNewPassword(e.target.value);
   };
-
-  const handlePasswordSubmit = async () => {
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5050/auth/updatePassword', { id, newPassword });
+      const response = await axios.post('http://localhost:5050/auth/updatePassword', { ic, newPassword });
       console.log(response);
-      console.log(id , newPassword);
       if (response.data.success) {
         setShowPasswordModal(false);
       } else {
@@ -70,6 +69,7 @@ function ForgotPasswordPage() {
       console.log('An error occurred. Please try again later.');
     }
   };
+  
 
   return (
     <div className="glass-card-reset">
